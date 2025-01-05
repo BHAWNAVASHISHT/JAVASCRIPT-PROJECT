@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Stopwatch</title>
+    <style>
+        #stopwatch {
+            font-size: 15em;
+            text-align: center;
+            background-color: blue;
+            color:crimson;
+            font-weight: 900;
+        }
+        body{
+            background-color: darkblue;
+        }
+        button {
+            font-size: 13em;
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: blue;
+            cursor: pointer;
+            border: salmon;
+            border-radius: 40px;
+        }
+        button:hover{
+            font-weight: bolder;
+        }
+        .h1{
+            font-size:13em ;
+            text-align: center;
+            background-color: blue;
+            color:aqua;
+            font-weight: 900;
+        }
+        }
+        .start{
+            background-color: cornflowerblue;
+        }
+        .stop{
+            background-color: red;
+        }
+        .reset{
+            background-color: orange;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="h1">Stopwatch</div>
+    <hr>    
+    <div id="stopwatch">0:0:0</div>
+    
+    <center>
+        <br>
+    <button onclick="startStopwatch()" class="start">Start</button>
+    <button onclick="stopStopwatch()" class="stop">Stop</button>
+    <button onclick="resetStopwatch()" class="reset">Reset</button>
+
+    <script>
+        let stopwatchInterval;
+        let elapsedTime = 0; // Time in milliseconds
+
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            return hours + ":" + minutes + ":" + seconds;
+        }
+
+        function updateStopwatch() {
+            const stopwatchElement = document.getElementById("stopwatch");
+            stopwatchElement.textContent = formatTime(elapsedTime);
+        }
+
+        function startStopwatch() {
+            if (!stopwatchInterval) {
+                const startTime = Date.now() - elapsedTime;
+                stopwatchInterval = setInterval(() => {
+                    elapsedTime = Date.now() - startTime;
+                    updateStopwatch();
+                }, 100);
+            }
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+        }
+
+        function resetStopwatch() {
+            stopStopwatch();
+            elapsedTime = 0;
+            updateStopwatch();
+        }
+    </script>
+</body>
+</html>
