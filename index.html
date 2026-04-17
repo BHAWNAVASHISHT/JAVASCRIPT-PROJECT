@@ -1,60 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link rel="stylesheet" type="text/css" href="calstyle.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <title>Vibrant Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      background: #1e1e2f;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      width: 300px;
+    }
+
+    .display {
+      background: #0f0f1a;
+      color: #00ffcc;
+      font-size: 2em;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: right;
+      margin-bottom: 15px;
+      overflow-x: auto;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 15px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .num {
+      background: #2d2d44;
+      color: white;
+    }
+
+    .operator {
+      background: #ff9f43;
+      color: white;
+    }
+
+    .equal {
+      background: #00c853;
+      color: white;
+      grid-column: span 2;
+    }
+
+    .clear {
+      background: #ff3d00;
+      color: white;
+    }
+  </style>
 </head>
 <body>
-    <h1 class="heading">CALCULATOR USING JAVASCRIPT</h1>
-    <center>
-        <div class="elements">
 
-        <input type="text" id="input" placeholder="0">
-        <br>
-        <br>
-        <br>
-        <div class="button">
-            <div>
-                <button class="ac">AC</button>
-                <button class="del">DEL</button>
-                <button class="operator">%</button>
-                <button class="operator">/</button>
-            </div>
-            <br>
-            <div>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button class="operator">+</button>
-            </div>
-            <br>
-        
-        
-            <div>
-                <button>6</button>
-                <button>5</button>
-                <button>4</button>
-                <button class="operator">-</button>
-            </div>
-            <br>
-            <div>
-                <button>3</button>
-                <button>2</button>
-                <button>1</button>
-                <button class="operator">*</button>
-            </div>
-            <br>
-            <div>
-                <button>00</button>
-                <button>0</button>
-                <button class="operator">.</button>
-                <button class="equal">=</button>
-            </div>
-        </div>
-    </center>
-</div>        
+<div class="calculator">
+  <div class="display" id="display">0</div>
+
+  <div class="buttons">
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button class="operator" onclick="append('%')">%</button>
+    <button class="operator" onclick="append('/')">÷</button>
+    <button class="operator" onclick="append('*')">×</button>
+
+    <button class="num" onclick="append('7')">7</button>
+    <button class="num" onclick="append('8')">8</button>
+    <button class="num" onclick="append('9')">9</button>
+    <button class="operator" onclick="append('-')">−</button>
+
+    <button class="num" onclick="append('4')">4</button>
+    <button class="num" onclick="append('5')">5</button>
+    <button class="num" onclick="append('6')">6</button>
+    <button class="operator" onclick="append('+')">+</button>
+
+    <button class="num" onclick="append('1')">1</button>
+    <button class="num" onclick="append('2')">2</button>
+    <button class="num" onclick="append('3')">3</button>
+    <button class="equal" onclick="calculate()">=</button>
+
+    <button class="num" onclick="append('0')">0</button>
+    <button class="num" onclick="append('.')">.</button>
+  </div>
+</div>
+
+<script>
+  let display = document.getElementById("display");
+
+  function append(value) {
+    if (display.innerText === "0") {
+      display.innerText = value;
+    } else {
+      display.innerText += value;
+    }
+  }
+
+  function clearDisplay() {
+    display.innerText = "0";
+  }
+
+  function calculate() {
+    try {
+      display.innerText = eval(display.innerText);
+    } catch {
+      display.innerText = "Error";
+    }
+  }
+</script>
+
 </body>
 </html>
